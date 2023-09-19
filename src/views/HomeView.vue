@@ -89,9 +89,12 @@ const pickTile = (index: number) => {
   if (pickedTiles.value.length < 7) {
     pickedTiles.value.push(flyLayout.value[index]);
     flyLayout.value.splice(index, 1);
-    // pickedTiles.value.sort((a: any, b: any) => {
-    //   return a.value?.localeCompare(b.value ?? "")
-    // })
+    pickedTiles.value.sort((a: any, b: any) => {
+      return a.value?.localeCompare(b.value ?? "")
+    })
+    setTimeout(() => {
+      removeThreeInARow();
+    }, 200)
     // let tileIndex = 0;
     // let count = 0;
     // let currentTile: StonePlace | null = null;
@@ -110,14 +113,42 @@ const pickTile = (index: number) => {
     //   currentTile = item;
     //   currentIndex = idx;
     // })
-    const last3 = pickedTiles.value.slice(-3);
-    if (last3.length === 3) {
-      if (last3.every(item => item.value === last3[0].value)) {
-        pickedTiles.value.splice(pickedTiles.value.length - 3, 3)
-      }
-    }
+    // const last3 = pickedTiles.value.slice(-3);
+    // if (last3.length === 3) {
+    //   if (last3.every(item => item.value === last3[0].value)) {
+    //     pickedTiles.value.splice(pickedTiles.value.length - 3, 3)
+    //   }
+    // }
   }
 }
+
+const removeThreeInARow = () => {
+  let count = 1;
+  let currentItem = pickedTiles.value[0];
+  const result = [currentItem];
+
+  for (let i = 1; i < pickedTiles.value.length; i++) {
+    if (pickedTiles.value[i].value === currentItem.value) {
+      count++;
+    } else {
+      count = 1;
+      currentItem = pickedTiles.value[i];
+    }
+
+    result.push(currentItem);
+
+    if (count === 3) {
+      result.pop();
+      result.pop();
+      result.pop();
+      count = 1;
+    }
+  }
+
+  // Update the 'pickedTiles' ref with the filtered result
+  pickedTiles.value = result;
+}
+
 </script>
 
 <template>
