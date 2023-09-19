@@ -95,24 +95,6 @@ const pickTile = (index: number) => {
     setTimeout(() => {
       removeThreeInARow();
     }, 200)
-    // let tileIndex = 0;
-    // let count = 0;
-    // let currentTile: StonePlace | null = null;
-    // let currentIndex = 0;
-    // pickedTiles.value.forEach((item, idx) => {
-    //   if(currentTile?.value === item.value) {
-    //     console.log(idx);
-    //     if (count === 0) tileIndex = currentIndex;
-    //     count += 1;
-    //     if (count === 2) {
-    //       console.log(tileIndex);
-    //       pickedTiles.value.splice(tileIndex, 3)
-    //       count = 0;
-    //     }
-    //   }
-    //   currentTile = item;
-    //   currentIndex = idx;
-    // })
     // const last3 = pickedTiles.value.slice(-3);
     // if (last3.length === 3) {
     //   if (last3.every(item => item.value === last3[0].value)) {
